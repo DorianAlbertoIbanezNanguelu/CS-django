@@ -25,9 +25,11 @@ SECRET_KEY = '9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','54.85.35.44']
 
 MEDIA_URL = '/'
+
+
 
 # Application definition
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -76,8 +79,12 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+	    'USER': 'postgres',
+	    'PASSWORD': '12345678',
+	    'HOST': 'roberto-db.cxoosrzhoxql.us-east-1.rds.amazonaws.com',
+	    'PORT': '5432',
+        'NAME': 'roberto1'
     }
 }
 

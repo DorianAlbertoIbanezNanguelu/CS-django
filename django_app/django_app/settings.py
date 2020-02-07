@@ -25,7 +25,7 @@ SECRET_KEY = '9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','174.129.177.97']
 
 MEDIA_URL = '/'
 

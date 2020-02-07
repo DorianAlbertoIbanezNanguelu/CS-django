@@ -25,7 +25,7 @@ SECRET_KEY = '9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','54.85.35.44']
+ALLOWED_HOSTS = ['localhost','174.129.177.97','52.90.159.74']
 
 MEDIA_URL = '/'
 
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'rest_framework',
+    'rest_framework.authtoken',	
 ]
 
 MIDDLEWARE = [
@@ -82,9 +83,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 	    'USER': 'postgres',
 	    'PASSWORD': '12345678',
-	    'HOST': 'roberto-db.cxoosrzhoxql.us-east-1.rds.amazonaws.com',
+	    'HOST': 'database-1.ctyhmknrxrgw.us-east-1.rds.amazonaws.com',
 	    'PORT': '5432',
-        'NAME': 'roberto1'
+        'NAME': 'django_db'
     }
 }
 
@@ -102,7 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'UTC'
 
@@ -119,3 +120,19 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+SITE_ID = 1
+
+REST_FRAMEWORK = {
+'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
+'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
+'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+'PAGE_SIZE': 100
+}
+
+CORS_ALLOW_METHODS = (
+'DELETE',
+'GET',
+'POST',
+'PUT',
+)

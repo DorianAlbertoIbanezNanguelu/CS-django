@@ -9,23 +9,35 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from decouple import config, Csv
+from unipath import Path
+from dj_database_url import parse as db_url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
+
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY='9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
+
+TEMPLATE_DEBUG = DEBUG
+
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('EMAIL_PORT', default=25, cast=int)
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','174.129.177.97']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS',cast=Csv())
 
 MEDIA_URL = '/'
 
@@ -120,7 +132,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = 'staticfiles'
+
 
 SITE_ID = 1
 

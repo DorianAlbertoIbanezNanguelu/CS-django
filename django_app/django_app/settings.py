@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).parent
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-DEBUG = config('DEBUG', default=False, cast=bool)
-SECRET_KEY='9d=+n%pr-ak5pqb(h4fn2jw1i38km=p@75y3jsjdpqn2!sfft^'
+DEBUG = config('DEBUG', default=True, cast=bool)
+SECRET_KEY= config('SECRET_KEY')
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -54,7 +54,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',	
-    'Login'
+    'rest_framework_swagger',
+    'drf_yasg',
+    'Login',
+    'Profile'
 ]
 
 MIDDLEWARE = [
@@ -94,13 +97,14 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-	    'USER': 'postgres',
-	    'PASSWORD': '12345678',
-	    'HOST': 'database-1.ctyhmknrxrgw.us-east-1.rds.amazonaws.com',
-	    'PORT': '5432',
-        'NAME': 'django_db'
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': '5432',
+            'NAME': config('DB_NAME'),
     }
 }
+
 
 
 # Password validation
@@ -126,6 +130,24 @@ USE_L10N = True
 
 USE_TZ = True
 
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        #'basic': {
+            #'type': 'basic'
+        #}
+        'api_key':{
+            'type':'apiKey',
+            'in':'header',
+            'name':'Authorization'
+        }
+
+    },
+    'JSON_EDITOR': True,
+    
+}
+
+LOGIN_URL = 'rest_framework:login'
+LOGOUT_URL = 'rest_framework:logout'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -141,7 +163,23 @@ REST_FRAMEWORK = {
 'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
 'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-'PAGE_SIZE': 100
+
+'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
+'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+),
+
+'PAGE_SIZE': 100,
+'DEFAULT_MODEL_SERIALIZER_CLASS': (
+        'rest_framework.serializers.ModelSerializer',
+),
+'DEFAULT_FILTER_BACKENDS': (
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+),
 }
 
 CORS_ALLOW_METHODS = (

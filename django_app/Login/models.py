@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
-
 class Example2(models.Model):
     name = models.CharField(max_length=254,null=False)
     year = models.IntegerField(null=False)
@@ -11,6 +9,8 @@ class Example2(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     class Meta:
         db_table = 'Example2'
+
+# Create your models here.

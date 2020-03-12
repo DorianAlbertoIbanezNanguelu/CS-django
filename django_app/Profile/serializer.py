@@ -1,38 +1,40 @@
-from rest_framework import routers, serializers, viewsets
+#Importando librerías de Django
+from rest_framework import routers,serializers,viewsets
 
-from Profile.models import Profile
-from Profile.models import ModelCiudad
-from Profile.models import ModelGenero
-from Profile.models import ModelOcupacion
-from Profile.models import ModelEstado
-from Profile.models import ModelEstadoCivil
+#Importando el modelo del componente Login (desde el archivo models.py)
+from Profile.models import ProfileModel, CiudadModel, GeneroModel, OcupacionModel, EstadoModel, EstadoCivilModel
 
-class ProfileSerializers(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Profile
+        model = ProfileModel
+        fields = ('__all__')
+        
+class ProfileGetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfileModel
+        fields = ('nombre','apPat','apMat','edad')
+
+class CiudadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CiudadModel
         fields = ('__all__')
 
-class CiudadSerializers(serializers.ModelSerializer):
+class GeneroSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ModelCiudad
+        model = GeneroModel
         fields = ('__all__')
 
-class GeneroSerializers(serializers.ModelSerializer):
+class OcupacionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ModelGenero
-        fields = ('__all__')
-    
-class OcupacionSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = ModelOcupacion
+        model = OcupacionModel
         fields = ('__all__')
 
-class EstadoSerializers(serializers.ModelSerializer):
+class EstadoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ModelEstado
+        model = EstadoModel
         fields = ('__all__')
-    
-class EstadoCivilSerializers(serializers.ModelSerializer):
+
+class EstadoCivilSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ModelEstadoCivil
+        model = EstadoCivilModel
         fields = ('__all__')

@@ -15,6 +15,7 @@ from Login.models import Example2
 from Login.serializer import Example2Serializers
 
 
+
 class CustonAuthToken(ObtainAuthToken):
     
     def post(self, request, * args, **kwars):

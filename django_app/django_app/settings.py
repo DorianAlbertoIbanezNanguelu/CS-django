@@ -154,7 +154,7 @@ LOGOUT_URL = 'rest_framework:logout'
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = 'assets'
 
 
 SITE_ID = 1

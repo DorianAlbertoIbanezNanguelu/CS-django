@@ -26,18 +26,82 @@ from rest_framework.schemas import AutoSchema
 
 
 class ProfileListSchema(AutoSchema):
+    algo=int(19)
     def get_manual_fields(self,path,method):
         extra_fields = []
         if method.lower() in ('post','get'):
             extra_fields = [
-                coreapi.Field('nombre')
+                coreapi.Field('nombre'),
+                coreapi.Field('apPat'),
+                coreapi.Field('apMat'),
+                coreapi.Field('edad'),
+                coreapi.Field('ciudad'),
+                coreapi.Field('genero'),
+                coreapi.Field('ocupacion'),
+                coreapi.Field('estado'),
+                coreapi.Field('estadoCivil'),
             ]
         manual_fields=super().get_manual_fields(path,method)
         return manual_fields + extra_fields
 
+class ciudadListSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('ciudad')
+            ]
+        manual_fields=super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
+class estadoListSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('estado')
+            ]
+        manual_fields=super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
+class estadoCivilListSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('estado_civil')
+            ]
+        manual_fields=super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
+class generoListSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('genero')
+            ]
+        manual_fields=super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
+class ocupacionListSchema(AutoSchema):
+    def get_manual_fields(self,path,method):
+        extra_fields = []
+        if method.lower() in ('post','get'):
+            extra_fields = [
+                coreapi.Field('ocupacion')
+            ]
+        manual_fields=super().get_manual_fields(path,method)
+        return manual_fields + extra_fields
+
+
 class ProfileList(APIView):
+
+
     permission_classes=[]
     schema=ProfileListSchema()
+
+
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
@@ -56,7 +120,7 @@ class ProfileList(APIView):
 
 class CiudadList(APIView):
     permission_classes=[]
-    schema=ProfileListSchema()
+    schema=ciudadListSchema()
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
@@ -75,7 +139,7 @@ class CiudadList(APIView):
 
 class GeneroList(APIView):
     permission_classes=[]
-    schema=ProfileListSchema()
+    schema=generoListSchema()
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
@@ -94,7 +158,7 @@ class GeneroList(APIView):
 
 class OcupacionList(APIView):
     permission_classes=[]
-    schema=ProfileListSchema()
+    schema=ocupacionListSchema()
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
@@ -113,7 +177,7 @@ class OcupacionList(APIView):
 
 class EstadoList(APIView):
     permission_classes=[]
-    schema=ProfileListSchema()
+    schema=estadoListSchema()
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
@@ -132,7 +196,7 @@ class EstadoList(APIView):
 
 class EstadoCivilList(APIView):
     permission_classes=[]
-    schema=ProfileListSchema()
+    schema=estadoCivilListSchema()
     def get(self,request,format=None):
         print("Realizando consulta...")
         #people = Person.objects.all().only(fields)
